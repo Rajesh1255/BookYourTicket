@@ -6,7 +6,7 @@ RUN gradle build
 # Package stage
 
 FROM openjdk:latest
-ENV JAR_NAME=bookyourticket.jar
+ENV JAR_NAME=bookyourticket-0.0.1-SNAPSHOT.jar
 ENV APP_HOME=/usr/app/
 WORKDIR $APP_HOME
 COPY --from=BUILD $APP_HOME .
