@@ -14,14 +14,15 @@ public class Search {
     @Autowired
     MovieQuery movieQuery;
 
-    @GetMapping("/searchMovie/{movieName}")
+    @GetMapping("/searchMovie/{movieName}/{id}")
     public List<String> searchMovie(@PathVariable("movieName") String movieName,
+                                    @PathVariable("id") int id,
                                     @RequestParam("city") String city,
                                     @RequestParam("date") String date) {
         log.info("enter search movie");
         Movie movie = new Movie();
         movie.setName(movieName);
-        movie.setId(1);
+        movie.setId(id);
         movieQuery.saveMovie(movie);
         log.info("Movie : {}", movie);
         return List.of("show1", "show2", "show3");
