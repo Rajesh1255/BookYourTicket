@@ -1,7 +1,6 @@
 package com.project.bookyourticket.controller;
 
-import com.project.bookyourticket.model.Movie;
-import com.project.bookyourticket.repository.MovieQuery;
+import com.project.bookyourticket.service.SearchService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,19 +11,29 @@ import java.util.List;
 @Slf4j
 public class Search {
     @Autowired
-    MovieQuery movieQuery;
+    SearchService searchService;
 
-    @GetMapping("/searchMovie/{movieName}/{id}")
-    public List<String> searchMovie(@PathVariable("movieName") String movieName,
-                                    @PathVariable("id") int id,
+    @GetMapping("/searchMovie/{userId}")
+    public List searchMovie(@PathVariable("userId") String userId,
+                                    @RequestParam("movie") String movie,
                                     @RequestParam("city") String city,
                                     @RequestParam("date") String date) {
-        log.info("enter search movie");
-        Movie movie = new Movie();
-        movie.setName(movieName);
-        movie.setId(id);
-        movieQuery.saveMovie(movie);
-        log.info("Movie : {}", movie);
-        return List.of("show1", "show2", "show3");
+        log.info("Search for all cinema halls available on date : {}, movie : {}, city : {}", date, movie, city);
+
+        return searchService.getCinemaHalls(city, movie, date);
+    }
+
+    @GetMapping("/save/cinemaHall")
+    public String saveCinemaHall(@RequestParam("movie") String movie,
+                                 @RequestParam("city") String city,
+                                 @RequestParam("date") String date) {
+        log.info("Save cinema hall data : date : {}, movie : {}, city : {}", date, movie, city);
+
+        try {
+            searchService.saveCinemaHall(city, movie, date);
+            return "Saved Successfully";
+        } catch (Exception ex) {
+            return "Unsuccessful save";
+        }
     }
 }

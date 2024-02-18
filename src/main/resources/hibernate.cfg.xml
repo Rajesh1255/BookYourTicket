@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection properties -->
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.url">jdbc:postgresql://dpg-cn14eamn7f5s73fdk5tg-a.oregon-postgres.render.com/bytdb?useSSL=false</property>
+        <property name="connection.username">bytdb_user</property>
+        <property name="connection.password">UPgFFUHw1fJjyW8xO7T7Ht6w5NJM6Ox7</property>
+
+        <!-- JDBC connection pool (use the built-in) -->
+        <property name="connection.pool_size">1</property>
+
+        <!-- SQL dialect -->
+        <property name="dialect">org.hibernate.dialect.PostgresPlusDialect</property>
+
+        <!-- Cache provider -->
+        <property name="cache.provider_class">org.hibernate.cache.HashtableCacheProvider</property>
+
+        <!-- Transaction management -->
+        <property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+
+        <!-- Current session context -->
+        <property name="current_session_context_class">thread</property>
+
+        <!-- Show SQL statements -->
+        <property name="hibernate.show_sql">true</property>
+
+        <!-- Mapping class using annotation -->
+<!--        <mapping class="com.hib.entities.Student" />-->
+        <mapping class="com.project.bookyourticket.model.CinemaHall" />
+    </session-factory>
+</hibernate-configuration>
